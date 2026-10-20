@@ -2,8 +2,8 @@ import axios from 'axios'
 // useRouter o'rniga routerni o'zini import qiling
 import router from '@/router' 
 
-const API_BASE_URL = "https://sklad.net.uz/api"
-// const API_BASE_URL = "https://api2.qurilishcrm.com.uz/api"
+// const API_BASE_URL = "https://sklad.net.uz/api"
+const API_BASE_URL = "https://api2.qurilishcrm.com.uz/api"
 
 const api = axios.create({
   baseURL: API_BASE_URL,
