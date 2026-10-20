@@ -72,7 +72,7 @@ export function useImageUpload(options = {}) {
     if (filename.startsWith('http')) return filename
     
     // const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
-    const baseUrl = "https://sklad.net.uz"
+    const baseUrl = "https://api2.qurilishcrm.com.uz"
     // Agar relative path bo'lsa
     if (filename.startsWith('/')) {
       return `${baseUrl}${filename}`
