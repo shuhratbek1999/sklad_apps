@@ -3,7 +3,7 @@ export const API_CONFIG = {
   //  BASE_URL: "https://sklad.net.uz/api",
    BASE_URL: "https://api2.qurilishcrm.com.uz/api",
   TIMEOUT: 10000,
-  UPLOAD_URL: import.meta.env.VITE_UPLOAD_URL || 'https://api2.qurilishcrm.com.uz/api/uploads'
+  UPLOAD_URL: import.meta.env.VITE_UPLOAD_URL || 'https://api2.qurilishcrm.com.uz'
 }
 
 export const STOCK_STATUS = {
