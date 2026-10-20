@@ -22,7 +22,7 @@
     </div>
     <div class="p-4">
       <h3 class="text-base font-semibold text-gray-900 mb-1 truncate" :title="product.name">
-        {{ product.name }}
+        {{ product }}
       </h3>
     </div>
   </div>
