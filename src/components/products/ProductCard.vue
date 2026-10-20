@@ -1,6 +1,5 @@
 <template>
   <div class="cursor-pointer hover:shadow-lg transition-shadow duration-300" @click="handleClick">
-    {{ product }}
     <div class="relative w-full overflow-hidden rounded-md">
       <div class="aspect-square min-h-60 bg-gray-50 dark:bg-gray-900 overflow-hidden">
         <img :src="getImageUrl(product.image_url)" class="w-full h-full object-cover" />
@@ -23,7 +22,7 @@
     </div>
     <div class="p-4">
       <h3 class="text-base font-semibold text-gray-900 mb-1 truncate" :title="product.name">
-        {{ product }}
+        {{ product.name }}
       </h3>
     </div>
   </div>
