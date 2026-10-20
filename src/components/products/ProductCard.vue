@@ -1,5 +1,6 @@
 <template>
   <div class="cursor-pointer hover:shadow-lg transition-shadow duration-300" @click="handleClick">
+    {{ product }}
     <div class="relative w-full overflow-hidden rounded-md">
       <div class="aspect-square min-h-60 bg-gray-50 dark:bg-gray-900 overflow-hidden">
         <img :src="getImageUrl(product.image_url)" class="w-full h-full object-cover" />
