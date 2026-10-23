@@ -151,6 +151,13 @@
               class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
               placeholder="Narxini kiriting" />
           </div>
+
+          <!-- Rasm tanlash inputi qo'shildi -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Mahsulot rasmini o'zgartirish</label>
+            <input type="file" @change="handleFileChange" accept="image/*"
+              class="w-full p-2 border border-gray-200 rounded-xl text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+          </div>
         </div>
 
         <div class="flex gap-3 pt-2">
@@ -178,8 +185,9 @@ import AddStockModal from '@/components/products/AddStockModal.vue'
 import SellProductModal from '@/components/products/SellProductModal.vue'
 import DeleteConfirmationModal from '@/components/products/DeleteConfirmationModal.vue'
 import { useToast } from '@/plugins/toast'
+
 const showEditModal = ref(false)
-const editData = ref({ name: '', price: 0 })
+const editData = ref({ name: '', price: 0, image: null })
 const toast = useToast()
 const route = useRoute()
 const router = useRouter()
@@ -215,16 +223,19 @@ const showSellModal = ref(false)
 const showDeleteModal = ref(false)
 const transactionLoading = ref(false)
 const deleteLoading = ref(false)
+
 const openOrderModal = () => {
   showOrderModal.value = true
 }
 const closeOrderModal = () => {
   showOrderModal.value = false
 }
+
 const openEditModal = () => {
   editData.value = {
     name: product.value.name,
-    price: product.value.price
+    price: product.value.price,
+    image: null
   }
   showEditModal.value = true
 }
@@ -232,12 +243,26 @@ const openEditModal = () => {
 const closeEditModal = () => {
   showEditModal.value = false
 }
+
+// Faylni o'zgaruvchiga yozib olish
+const handleFileChange = (e) => {
+  const file = e.target.files[0]
+  if (file) {
+    editData.value.image = file
+  }
+}
+
 const handleUpdateProduct = async () => {
   transactionLoading.value = true
   try {
     const formData = new FormData()
     formData.append('name', editData.value.name)
     formData.append('price', editData.value.price)
+
+    // Agar yangi rasm tanlangan bo'lsa, uni formData'ga qo'shamiz
+    if (editData.value.image) {
+      formData.append('image', editData.value.image)
+    }
 
     await productStore.updateProduct(productId, formData)
     toast.success('Mahsulot muvaffaqiyatli yangilandi')
@@ -249,6 +274,7 @@ const handleUpdateProduct = async () => {
     transactionLoading.value = false
   }
 }
+
 const handleOrderSubmit = async (orderData) => {
   transactionLoading.value = true
   try {
@@ -276,6 +302,7 @@ const handleOrderSubmit = async (orderData) => {
     transactionLoading.value = false
   }
 }
+
 onMounted(() => {
   fetchProductData()
 })
@@ -346,7 +373,6 @@ const handleDelete = async () => {
   deleteLoading.value = true
   try {
     await productStore.deleteProduct(productId)
-    // Redirect to home page after successful deletion
     router.push('/')
   } catch (err) {
     console.error('Error deleting product:', err)
@@ -354,7 +380,6 @@ const handleDelete = async () => {
     deleteLoading.value = false
   }
 }
-
 
 const handleImageError = (event) => {
   event.target.src = null
