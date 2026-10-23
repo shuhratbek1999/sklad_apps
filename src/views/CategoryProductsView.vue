@@ -92,6 +92,7 @@
                         </div>
 
                         <!-- ProductCard hodisasi bir marta ishlaydi -->
+                        {{ product }}
                         <ProductCard :product="product" :aria-label="isSelectionMode
                             ? `${product.name || 'Mahsulot'} tanlash`
                             : `${product.name || 'Mahsulot'} tafsiloti`"
