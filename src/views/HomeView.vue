@@ -80,6 +80,9 @@
       </div>
     </Card>
 
+    <!-- Kirim-chiqim tarixi: bugungi buyurtmalardan keyin -->
+    <RecentTransactions :key="transactionsRefreshKey" />
+
     <!-- Yuklashda xatolik -->
     <div v-if="loadError" class="p-3 rounded-xl bg-red-50 text-red-700 text-sm border border-red-200">
       <p>{{ loadError }}</p>
@@ -179,6 +182,7 @@ import { formatCurrency, formatTime } from '@/utils/formatters'
 
 import Card from '@/components/ui/Card.vue'
 import StatsCard from '@/components/products/StatsCard.vue'
+import RecentTransactions from '@/components/transactions/RecentTransactions.vue'
 
 const router = useRouter()
 
@@ -190,6 +194,7 @@ const { getImageUrl } = useImageUpload()
 
 const searchQuery = ref('')
 const loadError = ref('')
+const transactionsRefreshKey = ref(0)
 const failedImages = reactive({})
 
 const {
@@ -308,6 +313,8 @@ onActivated(() => {
   }
 
   refreshData()
+  // KeepAlive dan qaytganda tarix ham yangilansin.
+  transactionsRefreshKey.value += 1
 })
 
 const openCategory = (category) => {

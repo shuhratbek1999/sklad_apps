@@ -15,6 +15,14 @@ const routes = [
     }
   },
   {
+    path: '/transactions',
+    name: 'TransactionHistory',
+    component: () => import('@/views/TransactionHistory.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/',
     name: 'Home',
     component: () => import('@/views/HomeView.vue'),
